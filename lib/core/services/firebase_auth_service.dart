@@ -103,4 +103,10 @@ class FirebaseAuthService {
   Future<void>sendPasswordResetEmail({required String email}){
     return FirebaseAuth.instance.sendPasswordResetEmail(email: email.trim());
   }
+
+  Future<void> signOut() async {
+    await FirebaseAuth.instance.signOut();
+    await GoogleSignIn().signOut();
+    await FacebookAuth.instance.logOut();
+  }
 }

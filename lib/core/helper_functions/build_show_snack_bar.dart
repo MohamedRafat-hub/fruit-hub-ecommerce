@@ -11,6 +11,6 @@ ScaffoldFeatureController<SnackBar, SnackBarClosedReason> showSnackBar(BuildCont
           fontWeight: FontWeight.w400,
           height: 1.60,
         ),),
-      ), backgroundColor: color ?? Colors.green, duration: Duration(seconds: 1),)
+      ), backgroundColor: color ?? Colors.green, duration: Duration(seconds: 2),)
   );
 }

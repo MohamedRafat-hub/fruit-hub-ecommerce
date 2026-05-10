@@ -91,12 +91,13 @@ class Assets {
   static const String servicesFirestoreService = 'lib/core/services/firestore_service.dart';
   static const String servicesGitItService = 'lib/core/services/git_it_service.dart';
   static const String servicesSharedPrefrencesSingelton = 'lib/core/services/shared_prefrences_singelton.dart';
+  static const String signoutCubitSignOutCubit = 'lib/features/auth/presentation/cubits/signoutCubit/sign_out_cubit.dart';
+  static const String signoutCubitSignOutState = 'lib/features/auth/presentation/cubits/signoutCubit/sign_out_state.dart';
   static const String signupCubitSignupCubit = 'lib/features/auth/presentation/cubits/signup_cubit/signup_cubit.dart';
   static const String signupCubitSignupState = 'lib/features/auth/presentation/cubits/signup_cubit/signup_state.dart';
   static const String utilsAppColors = 'lib/core/utils/app_colors.dart';
   static const String utilsAppDecoration = 'lib/core/utils/app_decoration.dart';
   static const String utilsBackendEndpoint = 'lib/core/utils/backend_endpoint.dart';
-  static const String viewsAccountSettings = 'lib/features/auth/presentation/views/profile_view.dart';
   static const String viewsBestSellingView = 'lib/features/best_selling_fruits/presentation/views/best_selling_view.dart';
   static const String viewsCartView = 'lib/features/home/presentation/views/cart_view.dart';
   static const String viewsCheckoutView = 'lib/features/checkout/presentation/views/checkout_view.dart';
@@ -104,6 +105,7 @@ class Assets {
   static const String viewsMainView = 'lib/features/home/presentation/views/main_view.dart';
   static const String viewsOnboardingView = 'lib/features/onboarding/presentation/views/onboarding_view.dart';
   static const String viewsProductsView = 'lib/features/home/presentation/views/products_view.dart';
+  static const String viewsProfileView = 'lib/features/auth/presentation/views/profile_view.dart';
   static const String viewsSignupView = 'lib/features/auth/presentation/views/signup_view.dart';
   static const String viewsSplahView = 'lib/features/splash/presentation/views/splah_view.dart';
   static const String viewsTest = 'lib/features/checkout/presentation/views/test.json';

@@ -23,4 +23,5 @@ void setupLocator() {
 
   getIt.registerSingleton<AddOrderRepo>(
       AddOrderRepoImpl(getIt.get<DatabaseService>()));
+
 }
