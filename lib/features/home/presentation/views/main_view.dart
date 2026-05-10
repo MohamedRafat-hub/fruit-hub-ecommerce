@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fruit_hub/features/auth/presentation/views/profile_view.dart';
 import 'package:fruit_hub/features/home/presentation/managers/cartCubit/cart_cubit.dart';
 import 'package:fruit_hub/features/home/presentation/views/cart_view.dart';
 import 'package:fruit_hub/features/home/presentation/views/products_view.dart';
@@ -28,11 +29,11 @@ class _MainViewState extends State<MainView> {
       child: Scaffold(
         body: BlocListener<CartCubit, CartState>(
           listener: (context, state) {
-            if(state is CartItemAdded) {
-              showSnackBar(context , message: 'تم إضافة المنتج إلى سلة التسوق بنجاح');
-            }
-            else if(state is CartItemRemoved) {
-              showSnackBar(context , message: 'تم حذف المنتج من سلة التسوق');
+            if (state is CartItemAdded) {
+              showSnackBar(context,
+                  message: 'تم إضافة المنتج إلى سلة التسوق بنجاح');
+            } else if (state is CartItemRemoved) {
+              showSnackBar(context, message: 'تم حذف المنتج من سلة التسوق');
             }
           },
           child: IndexedStack(
@@ -41,9 +42,7 @@ class _MainViewState extends State<MainView> {
               HomeView(),
               ProductsView(),
               CartView(),
-              Container(
-                color: Colors.blue,
-              )
+              ProfileView(),
             ],
           ),
         ),
@@ -57,12 +56,9 @@ class _MainViewState extends State<MainView> {
       ),
     );
   }
-
 }
 
-
-List<BottomNavBarEntity> get bottomNavBarItems =>
-    [
+List<BottomNavBarEntity> get bottomNavBarItems => [
       BottomNavBarEntity(
           activeIcon: 'assets/icons/home_active_icon.svg',
           inActiveIcon: 'assets/icons/home_icon.svg',
@@ -80,7 +76,3 @@ List<BottomNavBarEntity> get bottomNavBarItems =>
           inActiveIcon: 'assets/icons/user_icon.svg',
           title: ' حسابي '),
     ];
-
-
-
-

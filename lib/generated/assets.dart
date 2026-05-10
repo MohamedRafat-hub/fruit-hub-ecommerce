@@ -96,6 +96,7 @@ class Assets {
   static const String utilsAppColors = 'lib/core/utils/app_colors.dart';
   static const String utilsAppDecoration = 'lib/core/utils/app_decoration.dart';
   static const String utilsBackendEndpoint = 'lib/core/utils/backend_endpoint.dart';
+  static const String viewsAccountSettings = 'lib/features/auth/presentation/views/profile_view.dart';
   static const String viewsBestSellingView = 'lib/features/best_selling_fruits/presentation/views/best_selling_view.dart';
   static const String viewsCartView = 'lib/features/home/presentation/views/cart_view.dart';
   static const String viewsCheckoutView = 'lib/features/checkout/presentation/views/checkout_view.dart';

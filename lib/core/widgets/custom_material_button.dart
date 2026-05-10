@@ -4,10 +4,11 @@ import '../utils/app_colors.dart';
 
 class CustomMaterialButton extends StatelessWidget {
   const CustomMaterialButton(
-      {super.key, this.onPressed, required this.buttonName});
+      {super.key, this.onPressed, required this.buttonName, this.color});
 
   final void Function()? onPressed;
   final String buttonName;
+  final Color? color;
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +24,7 @@ class CustomMaterialButton extends StatelessWidget {
           fontWeight: FontWeight.w700,
         ),
       ),
-      color: AppColors.primaryColor,
+      color: color ?? AppColors.primaryColor,
       minWidth: double.infinity,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16)
