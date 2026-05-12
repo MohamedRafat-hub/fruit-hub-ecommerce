@@ -25,6 +25,8 @@ class Assets {
   static const String errorsFailure = 'lib/core/errors/failure.dart';
   static const String generatedAssets = 'lib/generated/assets.dart';
   static const String generatedL10n = 'lib/generated/l10n.dart';
+  static const String getProfileDataCubitGetProfileDataCubit = 'lib/features/auth/presentation/cubits/getProfileDataCubit/get_profile_data_cubit.dart';
+  static const String getProfileDataCubitGetProfileDataState = 'lib/features/auth/presentation/cubits/getProfileDataCubit/get_profile_data_state.dart';
   static const String helperFunctionsBuildShowSnackBar = 'lib/core/helper_functions/build_show_snack_bar.dart';
   static const String helperFunctionsGetAverageRating = 'lib/core/helper_functions/get_average_rating.dart';
   static const String helperFunctionsGetDummyProducts = 'lib/core/helper_functions/get_dummy_products.dart';

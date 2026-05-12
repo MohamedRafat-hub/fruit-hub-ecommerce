@@ -90,6 +90,7 @@ flutter:
     - lib/features/onboarding/presentation/views/widgets/
     - lib/core/services/
     - lib/features/home/domain/entities/
+    - lib/features/auth/presentation/cubits/getProfileDataCubit/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
