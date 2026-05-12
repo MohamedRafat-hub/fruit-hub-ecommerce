@@ -85,12 +85,14 @@ class Assets {
   static const String reposAuthRepoImpl = 'lib/features/auth/data/repos/auth_repo_impl.dart';
   static const String reposProductRepo = 'lib/core/repos/product_repo.dart';
   static const String reposProductRepoImpl = 'lib/core/repos/product_repo_impl.dart';
+  static const String servicesCloudinaryStorage = 'lib/core/services/cloudinary_storage.dart';
   static const String servicesCustomBlocObserver = 'lib/core/services/custom_bloc_observer.dart';
   static const String servicesDatabaseService = 'lib/core/services/database_service.dart';
   static const String servicesFirebaseAuthService = 'lib/core/services/firebase_auth_service.dart';
   static const String servicesFirestoreService = 'lib/core/services/firestore_service.dart';
   static const String servicesGitItService = 'lib/core/services/git_it_service.dart';
   static const String servicesSharedPrefrencesSingelton = 'lib/core/services/shared_prefrences_singelton.dart';
+  static const String servicesStorageServicec = 'lib/core/services/storage_service.dart';
   static const String signoutCubitSignOutCubit = 'lib/features/auth/presentation/cubits/signoutCubit/sign_out_cubit.dart';
   static const String signoutCubitSignOutState = 'lib/features/auth/presentation/cubits/signoutCubit/sign_out_state.dart';
   static const String signupCubitSignupCubit = 'lib/features/auth/presentation/cubits/signup_cubit/signup_cubit.dart';

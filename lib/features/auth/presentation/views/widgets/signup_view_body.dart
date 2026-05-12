@@ -5,6 +5,7 @@ import 'package:fruit_hub/core/widgets/custom_material_button.dart';
 import 'package:fruit_hub/core/widgets/custom_text.dart';
 import 'package:fruit_hub/features/auth/presentation/cubits/signup_cubit/signup_cubit.dart';
 import 'package:fruit_hub/features/auth/presentation/views/widgets/custom_text_form_field.dart';
+import 'package:gap/gap.dart';
 
 import '../../../../../core/utils/app_colors.dart';
 
@@ -34,6 +35,7 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
           child: Column(
             spacing: 16,
             children: [
+              Gap(20),
               /// fields
               CustomTextFormField(
                   onSaved: (value) {

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fruit_hub/core/helper_functions/build_show_snack_bar.dart';
@@ -28,7 +30,6 @@ class ProfileView extends StatelessWidget {
             const UserData(),
             const Gap(30),
 
-            // قسم عام
             const Text('عام',
                 style:
                     TextStyle(color: Colors.grey, fontWeight: FontWeight.bold)),
@@ -45,7 +46,7 @@ class ProfileView extends StatelessWidget {
             _buildListTile(Icons.language, 'اللغة',
                 trailingText: 'العربية', hasNavigation: true),
             _buildSwitchTile(Icons.edit_road_outlined, 'الوضع', false),
-            // أيقونة تقريبية للوضع
+
 
             const SizedBox(height: 20),
 
@@ -132,25 +133,30 @@ class SignOutButton extends StatelessWidget {
 class UserData extends StatelessWidget {
   const UserData({super.key});
 
+
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Stack(
-          alignment: Alignment.bottomLeft,
-          children: [
-            const CircleAvatar(
-              radius: 45,
-              backgroundImage: NetworkImage(
-                  'https://via.placeholder.com/150'), // حط صورتك هنا
-            ),
-            CircleAvatar(
-              radius: 15,
-              backgroundColor: Colors.white,
-              child: Icon(Icons.camera_alt_outlined,
-                  size: 18, color: Colors.green[700]),
-            ),
-          ],
+        GestureDetector(
+          onTap: (){
+            log('Edit profile picture');
+          },
+          child: Stack(
+            alignment: Alignment.bottomLeft,
+            children: [
+               CircleAvatar(
+                radius: 45,
+                backgroundImage: NetworkImage('https://via.placeholder.com/150'), // حط صورتك هنا
+              ),
+              CircleAvatar(
+                radius: 15,
+                backgroundColor: Colors.white,
+                child: Icon(Icons.camera_alt_outlined,
+                    size: 18, color: Colors.green[700]),
+              ),
+            ],
+          ),
         ),
         Gap(10),
         Column(
