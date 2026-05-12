@@ -27,21 +27,18 @@ class FireStoreService implements DatabaseService {
       return data.data(); // map<String , dynamic>
     } else {
       Query<Map<String, dynamic>> data = fireStore.collection(path);
-      if(query !=null)
-        {
-          if(query['orderBy'] != null)
-            {
-              var orderByField = query['orderBy'];  // sellingCount
-              var descending = query['descending'];
+      if (query != null) {
+        if (query['orderBy'] != null) {
+          var orderByField = query['orderBy']; // sellingCount
+          var descending = query['descending'];
 
-              data = data.orderBy(orderByField , descending: descending);
-            }
-          if(query['limit'] != null)
-            {
-              var limit = query['limit'];
-              data = data.limit(limit);
-            }
+          data = data.orderBy(orderByField, descending: descending);
         }
+        if (query['limit'] != null) {
+          var limit = query['limit'];
+          data = data.limit(limit);
+        }
+      }
       var result = await data.get();
       return result.docs.map((e) => e.data()).toList();
     }
@@ -52,5 +49,13 @@ class FireStoreService implements DatabaseService {
       {required String path, required String documentId}) async {
     var data = await fireStore.collection(path).doc(documentId).get();
     return data.exists;
+  }
+
+  @override
+  Future<void> upfateData(
+      {required String path,
+      required String documentId,
+      required Map<String, dynamic> data}) async {
+    await fireStore.collection(path).doc(documentId).update(data);
   }
 }

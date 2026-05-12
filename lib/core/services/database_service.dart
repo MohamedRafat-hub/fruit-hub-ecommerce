@@ -12,4 +12,8 @@ abstract class DatabaseService {
   Future<bool> checkIfDataExist(
       {required String path, required String documentId});
 
+  Future<void> upfateData(
+      {required String path,
+      required String documentId,
+      required Map<String, dynamic> data});
 }
