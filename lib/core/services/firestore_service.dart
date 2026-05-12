@@ -52,10 +52,9 @@ class FireStoreService implements DatabaseService {
   }
 
   @override
-  Future<void> upfateData(
-      {required String path,
-      required String documentId,
-      required Map<String, dynamic> data}) async {
+  Future<void> updateData({required String path, required String documentId, required Map<String, dynamic> data})async {
     await fireStore.collection(path).doc(documentId).update(data);
   }
+
+
 }

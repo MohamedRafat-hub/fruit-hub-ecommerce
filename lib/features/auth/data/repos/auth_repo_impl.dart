@@ -153,4 +153,21 @@ class AuthRepoImpl extends AuthRepo {
       return left(ServerFailure(e.toString()));
     }
   }
+
+  @override
+  Future<Either<Failure, void>> updateUserProfileImage({
+    required String uid,
+    required String imageUrl,
+  }) async {
+    try {
+      await databaseService.updateData(
+        path: BackendEndpoint.getUserData,
+        documentId: uid,
+        data: {'profileImage': imageUrl},
+      );
+      return right(null);
+    } catch (e) {
+      return left(ServerFailure(e.toString()));
+    }
+  }
 }

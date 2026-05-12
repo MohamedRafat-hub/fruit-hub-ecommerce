@@ -22,4 +22,9 @@ abstract class AuthRepo {
   Future<Either<Failure , void>>sendPasswordResetEmail({required String email});
 
   Future<Either<Failure , void>>signOut();
+
+  Future<Either<Failure, void>> updateUserProfileImage({
+    required String uid,
+    required String imageUrl,
+  });
 }

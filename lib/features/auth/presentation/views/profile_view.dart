@@ -10,7 +10,6 @@ import 'package:fruit_hub/features/auth/presentation/views/widgets/signout_butto
 import 'package:fruit_hub/features/auth/presentation/views/widgets/user_data.dart';
 import 'package:gap/gap.dart';
 
-
 class ProfileView extends StatelessWidget {
   const ProfileView({super.key});
 
@@ -23,7 +22,7 @@ class ProfileView extends StatelessWidget {
         ),
         BlocProvider<UploadImageCubit>(
             create: (context) =>
-                UploadImageCubit(imageRepo: getIt.get<ImageRepo>()))
+                UploadImageCubit(imageRepo: getIt.get<ImageRepo>() , authRepo: getIt.get<AuthRepo>()))
       ],
       child: Scaffold(
         backgroundColor: Colors.white,

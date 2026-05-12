@@ -1,5 +1,6 @@
 import 'dart:developer' show log;
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fruit_hub/core/helper_functions/build_show_snack_bar.dart';
@@ -20,7 +21,7 @@ class UserData extends StatelessWidget {
       if (context.mounted) {
         context
             .read<UploadImageCubit>()
-            .uploadImage(path: path, fileName: fileName);
+            .uploadImage(path: path, fileName: fileName , uid: FirebaseAuth.instance.currentUser!.uid);
       }
     }
   }
