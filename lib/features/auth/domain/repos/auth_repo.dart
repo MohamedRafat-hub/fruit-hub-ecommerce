@@ -9,22 +9,26 @@ abstract class AuthRepo {
   Future<Either<Failure, UserEntity>> signInWithEmailAndPassword(
       {required String email, required String password});
 
-  Future<Either<Failure,UserEntity>> loginWithGoogle();
+  Future<Either<Failure, UserEntity>> loginWithGoogle();
 
-  Future<Either<Failure,UserEntity>> loginWithFacebook();
+  Future<Either<Failure, UserEntity>> loginWithFacebook();
 
   Future<void> addUserData({required UserEntity user});
 
- Future<bool> checkIfDataExist({required String path , required String documentId});
+  Future<bool> checkIfDataExist(
+      {required String path, required String documentId});
 
   Future<UserEntity> getUserData({required String uid});
 
-  Future<Either<Failure , void>>sendPasswordResetEmail({required String email});
+  Future<Either<Failure, void>> sendPasswordResetEmail({required String email});
 
-  Future<Either<Failure , void>>signOut();
+  Future<Either<Failure, void>> signOut();
 
   Future<Either<Failure, void>> updateUserProfileImage({
     required String uid,
     required String imageUrl,
   });
+
+  Future<Either<Failure, void>> updatePassword(
+      {required String password, required String newPassword});
 }

@@ -1,7 +1,20 @@
+import 'dart:developer';
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fruit_hub/core/services/database_service.dart';
+import 'package:fruit_hub/core/services/git_it_service.dart';
+import 'package:fruit_hub/core/widgets/custom_material_button.dart';
+import 'package:fruit_hub/features/auth/domain/repos/auth_repo.dart';
+import 'package:fruit_hub/features/auth/presentation/cubits/getProfileDataCubit/get_profile_data_cubit.dart';
+import 'package:fruit_hub/features/auth/presentation/cubits/updatePasswordCubit/update_password_cubit.dart';
 import 'package:fruit_hub/features/auth/presentation/views/widgets/build_app_bar.dart';
 import 'package:fruit_hub/features/auth/presentation/views/widgets/custom_text_form_field.dart';
+import 'package:fruit_hub/features/auth/presentation/views/widgets/my_account_view_body.dart';
+
+import '../../../../core/helper_functions/build_show_snack_bar.dart';
 
 class MyAccountView extends StatelessWidget {
   const MyAccountView({super.key});
@@ -10,67 +23,18 @@ class MyAccountView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: buildAppBar(
-          title: 'الملف الشخصي', context: context, hasLeading: true),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
-        child: MyAccountViewBody(),
+    return BlocProvider(
+      create: (context) => UpdatePasswordCubit(authRepo: getIt.get<AuthRepo>()),
+      child: Scaffold(
+        appBar: buildAppBar(
+            title: 'الملف الشخصي', context: context, hasLeading: true),
+        body: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+          child: MyAccountViewBody(),
+        ),
       ),
     );
   }
 }
 
-class MyAccountViewBody extends StatelessWidget {
-  const MyAccountViewBody({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      spacing: 10,
-      children: [
-        Text(
-          'المعلومات الشخصية',
-          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-        ),
-        CustomTextFormField(
-          hintText: 'اسم المستخدم',
-          keyboardType: TextInputType.text,
-          icon: Icon(Icons.edit_rounded , color: Colors.grey),
-        ),
-        CustomTextFormField(
-            hintText: 'الايميل',
-            keyboardType: TextInputType.text,
-            icon: Icon(Icons.edit_rounded , color: Colors.grey)),
-        Text(
-          'تغيير كلمة المرور',
-          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-        ),
-        CustomTextFormField(
-            hintText: 'كلمة المرور الحالية',
-            keyboardType: TextInputType.text,
-            icon: Icon(
-              Icons.remove_red_eye_rounded,
-              color: Colors.grey,
-            )),
-        CustomTextFormField(
-            hintText: 'كلمة المرور الجديدة',
-            keyboardType: TextInputType.text,
-            icon: Icon(
-              Icons.remove_red_eye_rounded,
-              color: Colors.grey,
-            )),
-        CustomTextFormField(
-          hintText: 'تأكيد كلمة المرور الجديدة',
-          keyboardType: TextInputType.text,
-          icon: Icon(
-            Icons.remove_red_eye_rounded,
-            color: Colors.grey,
-          ),
-        ),
-      ],
-    );
-  }
-}

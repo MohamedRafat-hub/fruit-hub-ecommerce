@@ -170,4 +170,18 @@ class AuthRepoImpl extends AuthRepo {
       return left(ServerFailure(e.toString()));
     }
   }
+
+  @override
+  Future<Either<Failure, void>> updatePassword({required String password, required String newPassword})async {
+    try {
+      final  email = FirebaseAuth.instance.currentUser!.email!;
+      await firebaseAuthService.reAuthenticate(email: email, password: password);
+      await firebaseAuthService.updatePassword(newPassword: newPassword);
+      return right(null);
+    } on CustomExceptions catch (e) {
+      return left(ServerFailure(e.errorMessage));
+    }catch(e){
+      return left(ServerFailure('حدث خطأ غير معروف، يرجى المحاولة مرة أخرى لاحقاً.'));
+    }
+  }
 }
