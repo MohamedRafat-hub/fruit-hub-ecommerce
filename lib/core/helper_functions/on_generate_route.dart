@@ -8,6 +8,7 @@ import 'package:fruit_hub/features/auth/presentation/views/my_account_view.dart'
 import 'package:fruit_hub/features/auth/presentation/views/signup_view.dart';
 import 'package:fruit_hub/features/best_selling_fruits/presentation/views/best_selling_view.dart';
 import 'package:fruit_hub/features/checkout/presentation/views/checkout_view.dart';
+import 'package:fruit_hub/features/checkout/presentation/views/payments_view.dart';
 import 'package:fruit_hub/features/home/domain/entities/cart_entity.dart';
 import 'package:fruit_hub/features/home/domain/entities/cart_item_entity.dart';
 import 'package:fruit_hub/features/home/presentation/views/favourite_products_view.dart';
@@ -53,6 +54,8 @@ Route<dynamic> onGenerateRoute(RouteSettings settings) {
             create: (context) => GetProfileDataCubit(fireStoreService: getIt.get<DatabaseService>()),
             child: MyAccountView(),
           ));
+    case PaymentsView.routeName:
+      return MaterialPageRoute(builder: (context) => PaymentsView());
     default:
       return MaterialPageRoute(builder: (context) => Scaffold());
   }

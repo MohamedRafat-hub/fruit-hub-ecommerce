@@ -15,6 +15,7 @@ import 'package:fruit_hub/features/home/presentation/views/favourite_products_vi
 import 'package:fruit_hub/features/home/presentation/views/widgets/about_us_view.dart';
 import 'package:gap/gap.dart';
 
+import '../../../checkout/presentation/views/payments_view.dart';
 import 'my_account_view.dart';
 
 class ProfileView extends StatelessWidget {
@@ -53,7 +54,9 @@ class ProfileView extends StatelessWidget {
             _buildListTile(Icons.inventory_2_outlined, 'طلباتي',
                 hasNavigation: true),
             _buildListTile(Icons.account_balance_wallet_outlined, 'المدفوعات',
-                hasNavigation: true),
+                hasNavigation: true , onTap: (){
+              Navigator.pushNamed(context, PaymentsView.routeName);
+            }),
             _buildListTile(Icons.favorite_border, 'المفضلة',
                 hasNavigation: true, onTap: () {
               log('Navigating to Favourite Products View');
