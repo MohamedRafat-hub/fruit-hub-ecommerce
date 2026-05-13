@@ -11,14 +11,17 @@ class CustomAppbarWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<GetProfileDataCubit, GetProfileDataState>(
       builder: (context, state) {
-        final userEntity = state is GetProfileDataSuccess ? state.userEntity : null;
+        final userEntity =
+            state is GetProfileDataSuccess ? state.userEntity : null;
         return ListTile(
-          leading: userEntity?.profileImage == null ? Image.asset('assets/images/profile_photo.png') : CircleAvatar(
-            radius: 20,
-            backgroundImage: NetworkImage(userEntity!.profileImage!),
-          ),
+          leading: userEntity?.profileImage == null
+              ? Image.asset('assets/images/profile_photo.png')
+              : CircleAvatar(
+                  radius: 20,
+                  backgroundImage: NetworkImage(userEntity!.profileImage!),
+                ),
           title: Text(
-            'صباح الخير !..',
+            getGreetingMessage(),
             textAlign: TextAlign.right,
             style: TextStyle(
               color: const Color(0xFF949D9E) /* Grayscale-400 */,
@@ -29,7 +32,7 @@ class CustomAppbarWidget extends StatelessWidget {
             ),
           ),
           subtitle: Text(
-           userEntity?.name ==null ? '' : userEntity!.name!,
+            userEntity?.name == null ? '' : userEntity!.name!,
             textAlign: TextAlign.right,
             style: TextStyle(
               color: const Color(0xFF0C0D0D) /* Grayscale-950 */,
@@ -43,5 +46,13 @@ class CustomAppbarWidget extends StatelessWidget {
       },
     );
   }
-}
 
+  String getGreetingMessage() {
+    final hour = DateTime.now().hour;
+    if (hour < 12) {
+      return 'صباح الخير !..';
+    } else {
+      return 'مساء الخير !..';
+    }
+  }
+}
