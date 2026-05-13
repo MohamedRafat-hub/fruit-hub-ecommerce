@@ -15,6 +15,8 @@ import 'package:fruit_hub/features/home/presentation/views/favourite_products_vi
 import 'package:fruit_hub/features/home/presentation/views/widgets/about_us_view.dart';
 import 'package:gap/gap.dart';
 
+import 'my_account_view.dart';
+
 class ProfileView extends StatelessWidget {
   const ProfileView({super.key});
 
@@ -45,7 +47,9 @@ class ProfileView extends StatelessWidget {
                     TextStyle(color: Colors.grey, fontWeight: FontWeight.bold)),
             const SizedBox(height: 10),
             _buildListTile(Icons.person_outline, 'الملف الشخصي',
-                hasNavigation: true),
+                hasNavigation: true , onTap: (){
+              Navigator.pushNamed(context, MyAccountView.routeName);
+                }),
             _buildListTile(Icons.inventory_2_outlined, 'طلباتي',
                 hasNavigation: true),
             _buildListTile(Icons.account_balance_wallet_outlined, 'المدفوعات',

@@ -116,6 +116,7 @@ class Assets {
   static const String viewsFavouriteProductsView = 'lib/features/home/presentation/views/favourite_products_view.dart';
   static const String viewsLoginView = 'lib/features/auth/presentation/views/login_view.dart';
   static const String viewsMainView = 'lib/features/home/presentation/views/main_view.dart';
+  static const String viewsMyAccountView = 'lib/features/auth/presentation/views/my_account_view.dart';
   static const String viewsOnboardingView = 'lib/features/onboarding/presentation/views/onboarding_view.dart';
   static const String viewsProductsView = 'lib/features/home/presentation/views/products_view.dart';
   static const String viewsProfileView = 'lib/features/auth/presentation/views/profile_view.dart';

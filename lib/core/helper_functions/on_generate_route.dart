@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fruit_hub/features/auth/presentation/views/login_view.dart';
+import 'package:fruit_hub/features/auth/presentation/views/my_account_view.dart';
 import 'package:fruit_hub/features/auth/presentation/views/signup_view.dart';
 import 'package:fruit_hub/features/best_selling_fruits/presentation/views/best_selling_view.dart';
 import 'package:fruit_hub/features/checkout/presentation/views/checkout_view.dart';
@@ -40,6 +41,8 @@ Route<dynamic>onGenerateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (context) => FavouriteProductsView());
     case AboutUsView.routeName :
       return MaterialPageRoute(builder: (context) => AboutUsView());
+    case MyAccountView.routeName :
+      return MaterialPageRoute(builder: (context) => MyAccountView());
     default:
       return MaterialPageRoute(builder: (context) => Scaffold());
   }
