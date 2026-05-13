@@ -23,6 +23,8 @@ class Assets {
   static const String entitiesUserEntity = 'lib/features/auth/domain/entities/user_entity.dart';
   static const String errorsExceptions = 'lib/core/errors/exceptions.dart';
   static const String errorsFailure = 'lib/core/errors/failure.dart';
+  static const String favouriteCubitFavouriteCubit = 'lib/features/home/presentation/managers/favouriteCubit/favourite_cubit.dart';
+  static const String favouriteCubitFavouriteState = 'lib/features/home/presentation/managers/favouriteCubit/favourite_state.dart';
   static const String generatedAssets = 'lib/generated/assets.dart';
   static const String generatedL10n = 'lib/generated/l10n.dart';
   static const String getProfileDataCubitGetProfileDataCubit = 'lib/features/auth/presentation/cubits/getProfileDataCubit/get_profile_data_cubit.dart';
