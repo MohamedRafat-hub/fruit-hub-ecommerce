@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fruit_hub/core/services/git_it_service.dart';
@@ -8,6 +10,7 @@ import 'package:fruit_hub/features/auth/presentation/cubits/uploadImageCubit/upl
 import 'package:fruit_hub/features/auth/presentation/views/widgets/build_app_bar.dart';
 import 'package:fruit_hub/features/auth/presentation/views/widgets/signout_button.dart';
 import 'package:fruit_hub/features/auth/presentation/views/widgets/user_data.dart';
+import 'package:fruit_hub/features/home/presentation/views/favourite_products_view.dart';
 import 'package:gap/gap.dart';
 
 class ProfileView extends StatelessWidget {
@@ -21,12 +24,13 @@ class ProfileView extends StatelessWidget {
           create: (context) => SignOutCubit(authRepo: getIt.get<AuthRepo>()),
         ),
         BlocProvider<UploadImageCubit>(
-            create: (context) =>
-                UploadImageCubit(imageRepo: getIt.get<ImageRepo>() , authRepo: getIt.get<AuthRepo>()))
+            create: (context) => UploadImageCubit(
+                imageRepo: getIt.get<ImageRepo>(),
+                authRepo: getIt.get<AuthRepo>())),
       ],
       child: Scaffold(
         backgroundColor: Colors.white,
-        appBar: buildAppBar(title: 'حسابي'),
+        appBar: buildAppBar(title: 'حسابي' , hasLeading: false, context: context),
         body: ListView(
           padding: const EdgeInsets.symmetric(horizontal: 20),
           children: [
@@ -45,7 +49,10 @@ class ProfileView extends StatelessWidget {
             _buildListTile(Icons.account_balance_wallet_outlined, 'المدفوعات',
                 hasNavigation: true),
             _buildListTile(Icons.favorite_border, 'المفضلة',
-                hasNavigation: true),
+                hasNavigation: true, onTap: () {
+              log('Navigating to Favourite Products View');
+              Navigator.pushNamed(context, FavouriteProductsView.routeName);
+            }),
             _buildSwitchTile(Icons.notifications_none, 'الاشعارات', true),
             _buildListTile(Icons.language, 'اللغة',
                 trailingText: 'العربية', hasNavigation: true),
@@ -71,7 +78,7 @@ class ProfileView extends StatelessWidget {
   }
 
   Widget _buildListTile(IconData icon, String title,
-      {bool hasNavigation = false, String? trailingText}) {
+      {bool hasNavigation = false, String? trailingText, Function()? onTap}) {
     return ListTile(
       contentPadding: EdgeInsets.zero,
       leading: Icon(icon, color: Colors.grey[700]),
@@ -82,10 +89,11 @@ class ProfileView extends StatelessWidget {
           if (trailingText != null)
             Text(trailingText, style: const TextStyle(color: Colors.grey)),
           if (hasNavigation)
-            const Icon(Icons.arrow_back_ios_new, size: 16, color: Colors.grey),
+            const Icon(Icons.arrow_back_ios_new,
+                size: 16, color: Colors.grey),
         ],
       ),
-      onTap: () {},
+      onTap: onTap,
     );
   }
 

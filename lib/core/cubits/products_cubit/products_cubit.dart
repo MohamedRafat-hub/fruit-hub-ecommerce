@@ -10,7 +10,7 @@ class ProductsCubit extends Cubit<ProductsState> {
 
   final ProductRepo productRepo;
   int productsLength = 0;
-  List<ProductEntity> _allProducts = [];
+  List<ProductEntity> allProducts = [];
 
   Future<void> getBestSellingProducts() async {
     emit(ProductsLoading());
@@ -18,7 +18,7 @@ class ProductsCubit extends Cubit<ProductsState> {
     result.fold((failure) {
       emit(ProductsFailure(failure.message));
     }, (products) {
-      _allProducts = products;
+      allProducts = products;
       emit(ProductsSuccess(products));
     });
   }
@@ -32,17 +32,17 @@ class ProductsCubit extends Cubit<ProductsState> {
       emit(ProductsFailure(failure.message));
     }, (products) {
       productsLength = products.length;
-      _allProducts = products;
+      allProducts = products;
       emit(ProductsSuccess(products));
     });
   }
 
   void searchProduct(String query) {
     if (query.isEmpty) {
-      emit(ProductsSuccess(_allProducts));
+      emit(ProductsSuccess(allProducts));
       return;
     }
-    final filtered = _allProducts.where((product) {
+    final filtered = allProducts.where((product) {
       return product.name.toLowerCase().contains(query.toLowerCase());
     }).toList();
     emit(ProductsSuccess(filtered));

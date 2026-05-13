@@ -113,6 +113,7 @@ class Assets {
   static const String viewsBestSellingView = 'lib/features/best_selling_fruits/presentation/views/best_selling_view.dart';
   static const String viewsCartView = 'lib/features/home/presentation/views/cart_view.dart';
   static const String viewsCheckoutView = 'lib/features/checkout/presentation/views/checkout_view.dart';
+  static const String viewsFavouriteProductsView = 'lib/features/home/presentation/views/favourite_products_view.dart';
   static const String viewsLoginView = 'lib/features/auth/presentation/views/login_view.dart';
   static const String viewsMainView = 'lib/features/home/presentation/views/main_view.dart';
   static const String viewsOnboardingView = 'lib/features/onboarding/presentation/views/onboarding_view.dart';
@@ -149,6 +150,7 @@ class Assets {
   static const String widgetsCustomText = 'lib/core/widgets/custom_text.dart';
   static const String widgetsCustomTextFormField = 'lib/features/auth/presentation/views/widgets/custom_text_form_field.dart';
   static const String widgetsDontHaveAccount = 'lib/features/auth/presentation/views/widgets/dont_have_account.dart';
+  static const String widgetsFavoriteProductsViewBody = 'lib/features/home/presentation/views/widgets/favorite_products_view_body.dart';
   static const String widgetsForgetPasswordWidget = 'lib/features/auth/presentation/views/widgets/forget_password_widget.dart';
   static const String widgetsFruitItem = 'lib/features/home/presentation/views/widgets/fruit_item.dart';
   static const String widgetsHomeFeaturedItem = 'lib/features/home/presentation/views/widgets/home_featured_item.dart';

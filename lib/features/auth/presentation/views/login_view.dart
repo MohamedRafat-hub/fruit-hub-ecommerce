@@ -24,6 +24,8 @@ class LoginView extends StatelessWidget {
       child: Scaffold(
         appBar: buildAppBar(
           title: 'تسجيل الدخول',
+          hasLeading: true,
+          context: context,
         ),
         body: LoginViewBodyBlocConsumer(),
       ),

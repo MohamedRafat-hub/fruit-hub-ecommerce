@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +9,8 @@ import 'package:fruit_hub/features/home/presentation/managers/favouriteCubit/fav
 import 'package:gap/gap.dart';
 
 class FruitItem extends StatefulWidget {
-  const FruitItem({super.key, required this.productEntity});
+  FruitItem({super.key, required this.productEntity , this.isFavourite});
+  bool? isFavourite = false;
 
   final ProductEntity productEntity;
 
@@ -19,7 +19,12 @@ class FruitItem extends StatefulWidget {
 }
 
 class _FruitItemState extends State<FruitItem> {
-  bool isSelected = false;
+  late bool isSelected;
+  @override
+  void initState() {
+    isSelected = widget.isFavourite ?? false;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,17 +43,21 @@ class _FruitItemState extends State<FruitItem> {
                   setState(() {
                     isSelected = !isSelected;
                   });
-                  if(isSelected == true)
-                    {
-                      context.read<FavouriteCubit>().addToFavourite(widget.productEntity.code);
-                    }
-                  else
-                    {
-                      context.read<FavouriteCubit>().removeFromFavourite(widget.productEntity.code);
-                    }
+                  if (isSelected) {
+                    context
+                        .read<FavouriteCubit>()
+                        .addToFavourite(widget.productEntity.code);
+                  } else {
+                    context
+                        .read<FavouriteCubit>()
+                        .removeFromFavourite(widget.productEntity.code);
+                  }
                 },
                 child: isSelected
-                    ? Icon(CupertinoIcons.heart_fill , color: Colors.red,)
+                    ? Icon(
+                        CupertinoIcons.heart_fill,
+                        color: Colors.red,
+                      )
                     : Icon(CupertinoIcons.heart)),
             Flexible(
               flex: 1,

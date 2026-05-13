@@ -6,6 +6,7 @@ import 'package:fruit_hub/features/best_selling_fruits/presentation/views/best_s
 import 'package:fruit_hub/features/checkout/presentation/views/checkout_view.dart';
 import 'package:fruit_hub/features/home/domain/entities/cart_entity.dart';
 import 'package:fruit_hub/features/home/domain/entities/cart_item_entity.dart';
+import 'package:fruit_hub/features/home/presentation/views/favourite_products_view.dart';
 import 'package:fruit_hub/features/home/presentation/views/main_view.dart';
 import 'package:fruit_hub/features/home/presentation/views/products_view.dart';
 import 'package:fruit_hub/features/home/presentation/views/widgets/home_view.dart';
@@ -34,6 +35,8 @@ Route<dynamic>onGenerateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (context) => CheckoutView(
         cartEntity: settings.arguments as CartEntity,
       ));
+    case FavouriteProductsView.routeName :
+      return MaterialPageRoute(builder: (context) => FavouriteProductsView());
     default:
       return MaterialPageRoute(builder: (context) => Scaffold());
   }
