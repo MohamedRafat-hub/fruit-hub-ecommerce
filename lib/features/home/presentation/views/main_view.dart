@@ -6,7 +6,9 @@ import 'package:fruit_hub/core/services/firestore_service.dart';
 import 'package:fruit_hub/core/services/git_it_service.dart';
 import 'package:fruit_hub/features/auth/presentation/cubits/getProfileDataCubit/get_profile_data_cubit.dart';
 import 'package:fruit_hub/features/auth/presentation/views/profile_view.dart';
+import 'package:fruit_hub/features/home/domain/repos/favourite_repo.dart';
 import 'package:fruit_hub/features/home/presentation/managers/cartCubit/cart_cubit.dart';
+import 'package:fruit_hub/features/home/presentation/managers/favouriteCubit/favourite_cubit.dart';
 import 'package:fruit_hub/features/home/presentation/views/cart_view.dart';
 import 'package:fruit_hub/features/home/presentation/views/products_view.dart';
 import 'package:fruit_hub/features/home/presentation/views/widgets/custom_bottom_navbar.dart';
@@ -34,9 +36,13 @@ class _MainViewState extends State<MainView> {
         BlocProvider<CartCubit>(
           create: (context) => CartCubit(),
         ),
-        BlocProvider(create: (context) => GetProfileDataCubit(
-            fireStoreService: getIt.get<DatabaseService>())
-          ..getProfileData(uid: FirebaseAuth.instance.currentUser!.uid)),
+        BlocProvider(
+            create: (context) => GetProfileDataCubit(
+                fireStoreService: getIt.get<DatabaseService>())
+              ..getProfileData(uid: FirebaseAuth.instance.currentUser!.uid)),
+        BlocProvider(
+            create: (context) =>
+                FavouriteCubit(favouriteRepo: getIt.get<FavouriteRepo>()))
       ],
       child: Scaffold(
         body: BlocListener<CartCubit, CartState>(

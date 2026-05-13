@@ -6,12 +6,20 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:fruit_hub/core/entities/product_entity.dart';
 import 'package:fruit_hub/features/home/presentation/managers/cartCubit/cart_cubit.dart';
+import 'package:fruit_hub/features/home/presentation/managers/favouriteCubit/favourite_cubit.dart';
 import 'package:gap/gap.dart';
 
-class FruitItem extends StatelessWidget {
+class FruitItem extends StatefulWidget {
   const FruitItem({super.key, required this.productEntity});
 
   final ProductEntity productEntity;
+
+  @override
+  State<FruitItem> createState() => _FruitItemState();
+}
+
+class _FruitItemState extends State<FruitItem> {
+  bool isSelected = false;
 
   @override
   Widget build(BuildContext context) {
@@ -27,14 +35,26 @@ class FruitItem extends StatelessWidget {
           children: [
             GestureDetector(
                 onTap: () {
-                  log('${productEntity.imageUrl}');
+                  setState(() {
+                    isSelected = !isSelected;
+                  });
+                  if(isSelected == true)
+                    {
+                      context.read<FavouriteCubit>().addToFavourite(widget.productEntity.code);
+                    }
+                  else
+                    {
+                      context.read<FavouriteCubit>().removeFromFavourite(widget.productEntity.code);
+                    }
                 },
-                child: Icon(CupertinoIcons.heart)),
+                child: isSelected
+                    ? Icon(CupertinoIcons.heart_fill , color: Colors.red,)
+                    : Icon(CupertinoIcons.heart)),
             Flexible(
               flex: 1,
               child: Center(
                 child: CachedNetworkImage(
-                  imageUrl: '${productEntity.imageUrl}',
+                  imageUrl: '${widget.productEntity.imageUrl}',
                   placeholder: (context, url) => CircularProgressIndicator(),
                   errorWidget: (context, url, error) => Icon(Icons.error),
                 ),
@@ -42,7 +62,7 @@ class FruitItem extends StatelessWidget {
             ),
             Gap(10),
             Text(
-              productEntity.name,
+              widget.productEntity.name,
               style: TextStyle(
                   color: Colors.black,
                   fontSize: 16,
@@ -54,7 +74,7 @@ class FruitItem extends StatelessWidget {
                   TextSpan(
                     children: [
                       TextSpan(
-                        text: '${productEntity.price}',
+                        text: '${widget.productEntity.price}',
                         style: TextStyle(
                           color: const Color(0xFFF4A91F) /* Orange-500 */,
                           fontSize: 13,
@@ -98,7 +118,9 @@ class FruitItem extends StatelessWidget {
                 Spacer(),
                 GestureDetector(
                     onTap: () {
-                      context.read<CartCubit>().addProductToCart(productEntity);
+                      context
+                          .read<CartCubit>()
+                          .addProductToCart(widget.productEntity);
                     },
                     child: SvgPicture.asset('assets/icons/add_icon.svg')),
               ],

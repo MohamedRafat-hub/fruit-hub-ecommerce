@@ -10,6 +10,8 @@ import 'package:fruit_hub/features/auth/domain/repos/auth_repo.dart';
 import 'package:fruit_hub/features/auth/domain/repos/image_repo.dart';
 import 'package:fruit_hub/features/checkout/data/repos/add_order_repo_impl.dart';
 import 'package:fruit_hub/features/checkout/domain/repos/add_order_repo.dart';
+import 'package:fruit_hub/features/home/data/repos/favourite_repo_impl.dart';
+import 'package:fruit_hub/features/home/domain/repos/favourite_repo.dart';
 import 'package:get_it/get_it.dart';
 import 'package:http/http.dart';
 
@@ -34,8 +36,9 @@ void setupLocator() {
     CloudinaryStorage(),
   );
 
-  getIt.registerSingleton<ImageRepo>(
-      ImageRepoImpl(getIt.get<StorageService>())
-  );
+  getIt
+      .registerSingleton<ImageRepo>(ImageRepoImpl(getIt.get<StorageService>()));
 
+  getIt.registerSingleton<FavouriteRepo>(
+      FavouriteRepoImpl(getIt.get<DatabaseService>()));
 }
