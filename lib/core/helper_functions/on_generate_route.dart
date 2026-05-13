@@ -9,6 +9,7 @@ import 'package:fruit_hub/features/home/domain/entities/cart_item_entity.dart';
 import 'package:fruit_hub/features/home/presentation/views/favourite_products_view.dart';
 import 'package:fruit_hub/features/home/presentation/views/main_view.dart';
 import 'package:fruit_hub/features/home/presentation/views/products_view.dart';
+import 'package:fruit_hub/features/home/presentation/views/widgets/about_us_view.dart';
 import 'package:fruit_hub/features/home/presentation/views/widgets/home_view.dart';
 import 'package:fruit_hub/features/onboarding/presentation/views/onboarding_view.dart';
 import 'package:fruit_hub/features/splash/presentation/views/splah_view.dart';
@@ -37,6 +38,8 @@ Route<dynamic>onGenerateRoute(RouteSettings settings) {
       ));
     case FavouriteProductsView.routeName :
       return MaterialPageRoute(builder: (context) => FavouriteProductsView());
+    case AboutUsView.routeName :
+      return MaterialPageRoute(builder: (context) => AboutUsView());
     default:
       return MaterialPageRoute(builder: (context) => Scaffold());
   }

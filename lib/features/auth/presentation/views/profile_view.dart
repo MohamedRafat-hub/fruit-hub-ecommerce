@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fruit_hub/core/services/git_it_service.dart';
@@ -11,6 +12,7 @@ import 'package:fruit_hub/features/auth/presentation/views/widgets/build_app_bar
 import 'package:fruit_hub/features/auth/presentation/views/widgets/signout_button.dart';
 import 'package:fruit_hub/features/auth/presentation/views/widgets/user_data.dart';
 import 'package:fruit_hub/features/home/presentation/views/favourite_products_view.dart';
+import 'package:fruit_hub/features/home/presentation/views/widgets/about_us_view.dart';
 import 'package:gap/gap.dart';
 
 class ProfileView extends StatelessWidget {
@@ -65,7 +67,9 @@ class ProfileView extends StatelessWidget {
                 style:
                     TextStyle(color: Colors.grey, fontWeight: FontWeight.bold)),
             const SizedBox(height: 10),
-            _buildListTile(Icons.info_outline, 'من نحن', hasNavigation: true),
+            _buildListTile(Icons.info_outline, 'من نحن', hasNavigation: true , onTap: (){
+              Navigator.pushNamed(context, AboutUsView.routeName);
+            }),
 
             const SizedBox(height: 30),
 
@@ -89,7 +93,7 @@ class ProfileView extends StatelessWidget {
           if (trailingText != null)
             Text(trailingText, style: const TextStyle(color: Colors.grey)),
           if (hasNavigation)
-            const Icon(Icons.arrow_back_ios_new,
+            const Icon(Icons.arrow_forward_ios_outlined,
                 size: 16, color: Colors.grey),
         ],
       ),

@@ -14,29 +14,27 @@ class BestSellingView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        centerTitle: true,
-        title: BestSellerTitle(),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: CustomNotificationWidget(),
-          ),
-        ],
-        leading: IconButton(onPressed: () {
-          Navigator.pop(context);
-        }, icon: Icon(Icons.arrow_back_ios_new_outlined)),
+    return BlocProvider(
+      create: (context) => ProductsCubit(
+        getIt.get<ProductRepo>(),
       ),
-      body: BlocProvider(
-        create: (context) => ProductsCubit(getIt.get<ProductRepo>())..getBestSellingProducts(),
-        child: BestSellingViewBody(),
+
+      child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          centerTitle: true,
+          title: const BestSellerTitle(),
+          actions: const [
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16),
+              child: CustomNotificationWidget(),
+            ),
+          ],
+          leading: BackButton(),
+        ),
+
+        body: const BestSellingViewBody(),
       ),
     );
   }
 }
-
-
-
-
