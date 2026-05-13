@@ -23,21 +23,16 @@ class FirebaseAuthService {
       return credential.user!;
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
-        throw CustomExceptions(
-            'الرقم السري ضعيف جدا.');
+        throw CustomExceptions('الرقم السري ضعيف جدا.');
       } else if (e.code == 'email-already-in-use') {
-        throw CustomExceptions(
-            'هذا البريد الإلكتروني مستخدم بالفعل.');
+        throw CustomExceptions('هذا البريد الإلكتروني مستخدم بالفعل.');
       } else if (e.code == 'network-request-failed') {
-        throw CustomExceptions(
-            'تأكد من اتصالك بالإنترنت وحاول مرة أخرى.');
+        throw CustomExceptions('تأكد من اتصالك بالإنترنت وحاول مرة أخرى.');
       } else {
-        throw CustomExceptions(
-            'لم يتم إنشاء الحساب. يرجى المحاولة مرة أخرى.');
+        throw CustomExceptions('لم يتم إنشاء الحساب. يرجى المحاولة مرة أخرى.');
       }
     } catch (e) {
-      throw CustomExceptions(
-          'لم يتم إنشاء الحساب. يرجى المحاولة مرة أخرى.');
+      throw CustomExceptions('لم يتم إنشاء الحساب. يرجى المحاولة مرة أخرى.');
     }
   }
 
@@ -97,10 +92,10 @@ class FirebaseAuthService {
   }
 
   bool isLoggedIn() {
-    return FirebaseAuth.instance.currentUser !=null;
+    return FirebaseAuth.instance.currentUser != null;
   }
 
-  Future<void>sendPasswordResetEmail({required String email}){
+  Future<void> sendPasswordResetEmail({required String email}) {
     return FirebaseAuth.instance.sendPasswordResetEmail(email: email.trim());
   }
 
@@ -108,5 +103,38 @@ class FirebaseAuthService {
     await FirebaseAuth.instance.signOut();
     await GoogleSignIn().signOut();
     await FacebookAuth.instance.logOut();
+  }
+
+  Future<void> reAuthenticate(
+      {required String email, required String password}) async {
+    try {
+      final credential =
+          EmailAuthProvider.credential(email: email, password: password);
+      await FirebaseAuth.instance.currentUser!
+          .reauthenticateWithCredential(credential);
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'wrong-password') {
+        throw CustomExceptions('كلمة المرور الحالية غير صحيحة.');
+      } else if (e.code == 'network-request-failed') {
+        throw CustomExceptions('تأكد من اتصالك بالإنترنت وحاول مرة أخرى.');
+      } else {
+        throw CustomExceptions('حدث خطأ، يرجى المحاولة مرة أخرى.');
+      }
+    }
+  }
+
+
+  Future<void>updatePassword({required String newPassword})async{
+    try {
+      FirebaseAuth.instance.currentUser!.updatePassword(newPassword);
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'weak-password') {
+        throw CustomExceptions('كلمة المرور الجديدة ضعيفة جداً.');
+      } else if (e.code == 'network-request-failed') {
+        throw CustomExceptions('تأكد من اتصالك بالإنترنت وحاول مرة أخرى.');
+      } else {
+        throw CustomExceptions('حدث خطأ، يرجى المحاولة مرة أخرى.');
+      }
+    }
   }
 }
