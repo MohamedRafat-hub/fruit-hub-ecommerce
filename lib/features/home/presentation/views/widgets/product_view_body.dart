@@ -1,15 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fruit_hub/core/cubits/products_cubit/products_cubit.dart';
 import 'package:fruit_hub/features/home/presentation/views/widgets/product_view_header.dart';
 import 'package:fruit_hub/features/home/presentation/views/widgets/search_text_field.dart';
 import 'package:gap/gap.dart';
-
 import 'custom_product_app_bar.dart';
 import 'products_grid_view_bloc_builder.dart';
-import 'custom_notification_widget.dart';
 
 class ProductsViewBody extends StatefulWidget {
   const ProductsViewBody({super.key});
@@ -36,8 +33,19 @@ class _ProductsViewBodyState extends State<ProductsViewBody> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 CustomProductsAppBar(),
-                SearchTextField(),
-                ProductsViewHeader(productsLength: context.read<ProductsCubit>().productsLength,),
+                SearchTextField(
+                  onChanged: (value) {
+                    context.read<ProductsCubit>().searchProduct(value);
+                  },
+                ),
+                BlocBuilder<ProductsCubit, ProductsState>(
+                  builder: (context, state) {
+                    final productsLength = state is ProductsSuccess ? state.products.length : 0;
+                    return ProductsViewHeader(
+                      productsLength: productsLength,
+                    );
+                  },
+                ),
                 Gap(10),
               ],
             ),
@@ -48,8 +56,3 @@ class _ProductsViewBodyState extends State<ProductsViewBody> {
     );
   }
 }
-
-
-
-
-

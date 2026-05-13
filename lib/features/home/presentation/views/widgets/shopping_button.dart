@@ -8,7 +8,9 @@ class ShoppingButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialButton(
-      onPressed: () {},
+      onPressed: () {
+        Navigator.pushNamed(context, 'products_view');    
+      },
       padding: EdgeInsets.symmetric(horizontal: 24 , vertical: 8),
       child: Text(
         'تسوق الان',

@@ -9,7 +9,7 @@ import 'package:gap/gap.dart';
 import '../../../../core/repos/product_repo.dart';
 class ProductsView extends StatelessWidget {
   const ProductsView({super.key});
-
+  static const String routeName = 'products_view';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
