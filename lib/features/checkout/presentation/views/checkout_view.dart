@@ -42,7 +42,7 @@ class _CheckoutViewState extends State<CheckoutView> {
     return BlocProvider(
       create: (context) => AddOrderCubit(getIt.get<AddOrderRepo>()),
       child: Scaffold(
-        appBar: checkoutAppBar(title: 'الشحن'),
+        appBar: checkoutAppBar(title: 'الشحن' , onPressed: ()=> Navigator.pop(context)),
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Provider.value(value: orderEntity, child: AddOrderCubitBlocBuilder(
