@@ -116,6 +116,7 @@ class Assets {
   static const String viewsCartView = 'lib/features/home/presentation/views/cart_view.dart';
   static const String viewsCheckoutView = 'lib/features/checkout/presentation/views/checkout_view.dart';
   static const String viewsFavouriteProductsView = 'lib/features/home/presentation/views/favourite_products_view.dart';
+  static const String viewsHomeView = 'lib/features/home/presentation/views/home_view.dart';
   static const String viewsLoginView = 'lib/features/auth/presentation/views/login_view.dart';
   static const String viewsMainView = 'lib/features/home/presentation/views/main_view.dart';
   static const String viewsMyAccountView = 'lib/features/auth/presentation/views/my_account_view.dart';
@@ -160,7 +161,6 @@ class Assets {
   static const String widgetsFruitItem = 'lib/features/home/presentation/views/widgets/fruit_item.dart';
   static const String widgetsHomeFeaturedItem = 'lib/features/home/presentation/views/widgets/home_featured_item.dart';
   static const String widgetsHomeFeaturedList = 'lib/features/home/presentation/views/widgets/home_featured_list.dart';
-  static const String widgetsHomeView = 'lib/features/home/presentation/views/widgets/home_view.dart';
   static const String widgetsHomeViewBody = 'lib/features/home/presentation/views/widgets/home_view_body.dart';
   static const String widgetsInActiveStepItem = 'lib/features/checkout/presentation/views/widgets/in_active_step_item.dart';
   static const String widgetsInactiveItem = 'lib/features/home/presentation/views/widgets/inactive_item.dart';

@@ -3,31 +3,34 @@ import 'package:flutter/material.dart';
 import '../main_view.dart';
 import 'bottom_navbar_item.dart';
 
-class CustomBottomNavBar extends StatefulWidget {
-  const CustomBottomNavBar({super.key, required this.onItemTapped});
+class CustomBottomNavBar extends StatelessWidget {
+
+  const CustomBottomNavBar({
+    super.key,
+    required this.onItemTapped,
+    required this.currentIndex,
+  });
 
   final ValueChanged<int> onItemTapped;
-
-  @override
-  State<CustomBottomNavBar> createState() => _CustomBottomNavBarState();
-}
-
-class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
-  int selectedIndex = 0;
+  final int currentIndex;
 
   @override
   Widget build(BuildContext context) {
+
     return Container(
       height: 70,
+
       decoration: ShapeDecoration(
         color: Colors.white,
-        shape: RoundedRectangleBorder(
+
+        shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(30),
             topRight: Radius.circular(30),
           ),
         ),
-        shadows: [
+
+        shadows: const [
           BoxShadow(
             color: Color(0x19000000),
             blurRadius: 25,
@@ -36,21 +39,29 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
           )
         ],
       ),
+
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
+
         children: bottomNavBarItems.asMap().entries.map((e) {
+
           var index = e.key;
           var entity = e.value;
 
           return GestureDetector(
+
             onTap: () {
-              setState(() {
-                selectedIndex = index;
-                widget.onItemTapped(index);
-              });
+
+              onItemTapped(index);
+
             },
+
             child: BottomNavBarItem(
-                isSelected: selectedIndex == index, bottomNavBarEntity: entity),
+
+              isSelected: currentIndex == index,
+
+              bottomNavBarEntity: entity,
+            ),
           );
         }).toList(),
       ),

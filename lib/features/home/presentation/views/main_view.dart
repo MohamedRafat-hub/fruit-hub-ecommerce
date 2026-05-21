@@ -12,67 +12,21 @@ import 'package:fruit_hub/features/home/presentation/managers/favouriteCubit/fav
 import 'package:fruit_hub/features/home/presentation/views/cart_view.dart';
 import 'package:fruit_hub/features/home/presentation/views/products_view.dart';
 import 'package:fruit_hub/features/home/presentation/views/widgets/custom_bottom_navbar.dart';
-import 'package:fruit_hub/features/home/presentation/views/widgets/home_view.dart';
+import 'package:fruit_hub/features/home/presentation/views/home_view.dart';
+import 'package:provider/provider.dart';
 
 import '../../../../core/helper_functions/build_show_snack_bar.dart';
 import '../../domain/entities/bottom_navbar_entity.dart';
 
-class MainView extends StatefulWidget {
+class MainView extends StatelessWidget {
   const MainView({super.key});
 
   static const routeName = 'HomeView';
 
   @override
-  State<MainView> createState() => _MainViewState();
-}
-
-class _MainViewState extends State<MainView> {
-  int currentIndex = 0;
-
-  @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider<CartCubit>(
-          create: (context) => CartCubit(),
-        ),
-        BlocProvider(
-            create: (context) => GetProfileDataCubit(
-                fireStoreService: getIt.get<DatabaseService>())
-              ..getProfileData(uid: FirebaseAuth.instance.currentUser!.uid)),
-        BlocProvider(
-            create: (context) =>
-                FavouriteCubit(favouriteRepo: getIt.get<FavouriteRepo>()))
-      ],
-      child: Scaffold(
-        body: BlocListener<CartCubit, CartState>(
-          listener: (context, state) {
-            if (state is CartItemAdded) {
-              showSnackBar(context,
-                  message: 'تم إضافة المنتج إلى سلة التسوق بنجاح');
-            } else if (state is CartItemRemoved) {
-              showSnackBar(context, message: 'تم حذف المنتج من سلة التسوق');
-            }
-          },
-          child: IndexedStack(
-            index: currentIndex,
-            children: [
-              HomeView(),
-              ProductsView(),
-              CartView(),
-              ProfileView(),
-            ],
-          ),
-        ),
-        bottomNavigationBar: CustomBottomNavBar(
-          onItemTapped: (int index) {
-            setState(() {
-              currentIndex = index;
-            });
-          },
-        ),
-      ),
-    );
+    return ChangeNotifierProvider(
+        create: (context) => BottomNavProvider(), child: MainViewBody());
   }
 }
 
@@ -94,3 +48,89 @@ List<BottomNavBarEntity> get bottomNavBarItems => [
           inActiveIcon: 'assets/icons/user_icon.svg',
           title: ' حسابي '),
     ];
+
+class BottomNavProvider extends ChangeNotifier {
+  int currentIndex = 0;
+
+  void changeIndex(int index) {
+    currentIndex = index;
+    notifyListeners();
+  }
+}
+
+class MainViewBody extends StatefulWidget {
+  const MainViewBody({super.key});
+
+  @override
+  State<MainViewBody> createState() => _MainViewBodyState();
+}
+
+class _MainViewBodyState extends State<MainViewBody> {
+  @override
+  Widget build(BuildContext context) {
+
+    final bottomNavProvider = Provider.of<BottomNavProvider>(context);
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<CartCubit>(
+          create: (context) => CartCubit(),
+        ),
+
+        BlocProvider(
+          create: (context) => GetProfileDataCubit(
+            fireStoreService: getIt.get<DatabaseService>(),
+          )..getProfileData(
+            uid: FirebaseAuth.instance.currentUser!.uid,
+          ),
+        ),
+
+        BlocProvider(
+          create: (context) => FavouriteCubit(
+            favouriteRepo: getIt.get<FavouriteRepo>(),
+          ),
+        ),
+      ],
+
+      child: Scaffold(
+
+        body: BlocListener<CartCubit, CartState>(
+          listener: (context, state) {
+
+            if (state is CartItemAdded) {
+
+              showSnackBar(
+                context,
+                message: 'تم إضافة المنتج إلى سلة التسوق بنجاح',
+              );
+
+            } else if (state is CartItemRemoved) {
+
+              showSnackBar(
+                context,
+                message: 'تم حذف المنتج من سلة التسوق',
+              );
+            }
+          },
+
+          child: IndexedStack(
+            index: bottomNavProvider.currentIndex,
+
+            children: const [
+              HomeView(),
+              ProductsView(),
+              CartView(),
+              ProfileView(),
+            ],
+          ),
+        ),
+
+        bottomNavigationBar: CustomBottomNavBar(
+          currentIndex: bottomNavProvider.currentIndex,
+          onItemTapped: (int index) {
+            bottomNavProvider.changeIndex(index);
+          },
+        ),
+      ),
+    );
+  }
+}

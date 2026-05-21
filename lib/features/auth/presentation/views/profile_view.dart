@@ -18,8 +18,17 @@ import 'package:gap/gap.dart';
 import '../../../checkout/presentation/views/payments_view.dart';
 import 'my_account_view.dart';
 
-class ProfileView extends StatelessWidget {
+class ProfileView extends StatefulWidget {
   const ProfileView({super.key});
+
+  @override
+  State<ProfileView> createState() => _ProfileViewState();
+}
+
+class _ProfileViewState extends State<ProfileView> {
+  bool notificationsEnabled = true;
+
+  bool darkModeEnabled = false;
 
   @override
   Widget build(BuildContext context) {
@@ -62,10 +71,19 @@ class ProfileView extends StatelessWidget {
               log('Navigating to Favourite Products View');
               Navigator.pushNamed(context, FavouriteProductsView.routeName);
             }),
-            _buildSwitchTile(Icons.notifications_none, 'الاشعارات', true),
+            _buildSwitchTile(title:  'الإشعارات', value: notificationsEnabled, onChanged: (value) {
+              setState(() {
+                notificationsEnabled = value;
+              });
+            }),
             _buildListTile(Icons.language, 'اللغة',
                 trailingText: 'العربية', hasNavigation: true),
-            _buildSwitchTile(Icons.edit_road_outlined, 'الوضع', false),
+
+            _buildSwitchTile(title: 'الوضع', value: darkModeEnabled, onChanged: (value) {
+              setState(() {
+                darkModeEnabled = value;
+              });
+            }),
 
             const SizedBox(height: 20),
 
@@ -108,16 +126,36 @@ class ProfileView extends StatelessWidget {
     );
   }
 
-  Widget _buildSwitchTile(IconData icon, String title, bool value) {
-    return ListTile(
-      contentPadding: EdgeInsets.zero,
-      leading: Icon(icon, color: Colors.grey[700]),
-      title: Text(title, style: const TextStyle(color: Colors.grey)),
-      trailing: Switch(
-        value: value,
-        onChanged: (val) {},
-        activeColor: Colors.green,
-      ),
-    );
-  }
+   Widget _buildSwitchTile({
+     required String title,
+     required bool value,
+     required Function(bool) onChanged,
+   }) {
+     return ListTile(
+       contentPadding: EdgeInsets.zero,
+
+       leading: value
+           ? const Icon(
+         Icons.notifications_none_outlined,
+         color: Colors.grey,
+       )
+           : const Icon(
+         Icons.notifications_off_outlined,
+         color: Colors.grey,
+       ),
+
+       title: Text(
+         title,
+         style: const TextStyle(color: Colors.grey),
+       ),
+
+       trailing: Switch(
+         value: value,
+
+         onChanged: onChanged,
+
+         activeColor: Colors.green,
+       ),
+     );
+   }
 }

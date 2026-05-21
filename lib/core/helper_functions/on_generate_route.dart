@@ -15,7 +15,7 @@ import 'package:fruit_hub/features/home/presentation/views/favourite_products_vi
 import 'package:fruit_hub/features/home/presentation/views/main_view.dart';
 import 'package:fruit_hub/features/home/presentation/views/products_view.dart';
 import 'package:fruit_hub/features/home/presentation/views/widgets/about_us_view.dart';
-import 'package:fruit_hub/features/home/presentation/views/widgets/home_view.dart';
+import 'package:fruit_hub/features/home/presentation/views/home_view.dart';
 import 'package:fruit_hub/features/onboarding/presentation/views/onboarding_view.dart';
 import 'package:fruit_hub/features/splash/presentation/views/splah_view.dart';
 
