@@ -30,7 +30,7 @@ class _FruitItemState extends State<FruitItem> {
   Widget build(BuildContext context) {
     return Container(
       decoration: ShapeDecoration(
-        color: const Color(0xFFF3F5F7),
+        color: Colors.grey.shade50,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       ),
       child: Padding(

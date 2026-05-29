@@ -9,7 +9,7 @@ class HomeFeaturedList extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView.builder(
       itemBuilder: (context, index) => HomeFeaturedItem(),
-      itemCount: 4,
+      itemCount: 1,
       scrollDirection: Axis.horizontal,
     );
   }

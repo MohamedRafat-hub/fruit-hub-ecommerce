@@ -4,7 +4,6 @@ import 'package:svg_image_provider/svg_image_provider.dart' show SvgImageProvide
 
 class HomeFeaturedItem extends StatelessWidget {
   const HomeFeaturedItem({super.key});
-
   @override
   Widget build(BuildContext context) {
     return SizedBox(

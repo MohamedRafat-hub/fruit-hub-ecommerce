@@ -92,7 +92,6 @@ class _MainViewBodyState extends State<MainViewBody> {
       ],
 
       child: Scaffold(
-
         body: BlocListener<CartCubit, CartState>(
           listener: (context, state) {
 
