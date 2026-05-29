@@ -47,8 +47,12 @@ class _CartViewBodyState extends State<CartViewBody> {
                 )),
           ),
           Gap(20),
-          CartItemList(
-            cartItems: context.read<CartCubit>().cartEntity.cartItems,
+          BlocBuilder<CartCubit, CartState>(
+            builder: (context, state) {
+              return CartItemList(
+                cartItems: context.read<CartCubit>().cartEntity.cartItems,
+              );
+            },
           ),
           Gap(70),
           Padding(
@@ -61,4 +65,3 @@ class _CartViewBodyState extends State<CartViewBody> {
     );
   }
 }
-
