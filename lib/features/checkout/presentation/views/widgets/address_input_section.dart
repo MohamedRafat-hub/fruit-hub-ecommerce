@@ -26,11 +26,6 @@ class AddressInputSection extends StatelessWidget {
                   hintText: 'الاسم بالكامل', keyboardType: TextInputType.text),
               CustomTextFormField(
                 onSaved: (value){
-                  context.read<OrderEntity>().shippingAddress!.email = value;
-                },
-                  hintText: 'البريد الالكتروني', keyboardType: TextInputType.text),
-              CustomTextFormField(
-                onSaved: (value){
                   context.read<OrderEntity>().shippingAddress!.address = value;
                 },
                   hintText: ' العنوان', keyboardType: TextInputType.text),
@@ -44,12 +39,6 @@ class AddressInputSection extends StatelessWidget {
                     context.read<OrderEntity>().shippingAddress!.phoneNumber = value;
                   },
                   hintText: 'رقم الهاتف', keyboardType: TextInputType.text),
-              CustomTextFormField(
-                  onSaved: (value){
-                    context.read<OrderEntity>().shippingAddress!.addressDetails = value;
-                  },
-                  hintText: 'رقم الطابق , رقم الشقة',
-                  keyboardType: TextInputType.text),
             ],
           ),
         ),
