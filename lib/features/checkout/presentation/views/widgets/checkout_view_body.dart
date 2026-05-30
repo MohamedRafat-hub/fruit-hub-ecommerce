@@ -59,21 +59,26 @@ class _CheckoutViewBodyState extends State<CheckoutViewBody> {
           formKey: formKey,
           valueListenable: valueNotifier,
         ),
-        CustomMaterialButton(
-            buttonName: getNextButtonText(),
-            onPressed: () {
-              if (currentPageIndex == 0) {
-                log('cache ${context.read<OrderEntity>().payWithCache}');
-                handleShippingSectionValidation(context);
-              } else if (currentPageIndex == 1) {
-                handleAddressingSectionValidation();
-              } else {
-                var orderEntity = context.read<OrderEntity>();
-                context
-                    .read<AddOrderCubit>()
-                    .addOrder(orderEntity: orderEntity);
-              }
-            }),
+        BlocBuilder<AddOrderCubit, AddOrderState>(
+          builder: (context, state) {
+            return CustomMaterialButton(
+              isLoading: state is AddOrderLoading,
+                buttonName: getNextButtonText(),
+                onPressed: () {
+                  if (currentPageIndex == 0) {
+                    log('cache ${context.read<OrderEntity>().payWithCache}');
+                    handleShippingSectionValidation(context);
+                  } else if (currentPageIndex == 1) {
+                    handleAddressingSectionValidation();
+                  } else {
+                    var orderEntity = context.read<OrderEntity>();
+                    context
+                        .read<AddOrderCubit>()
+                        .addOrder(orderEntity: orderEntity);
+                  }
+                });
+          },
+        ),
         Gap(50),
       ],
     );
@@ -122,7 +127,7 @@ class _CheckoutViewBodyState extends State<CheckoutViewBody> {
         // Test ?
         clientId: "",
         secretKey: "",
-        transactions:  [
+        transactions: [
           paymentEntity.toJson(),
         ],
         note: "Contact us for any questions on your order.",

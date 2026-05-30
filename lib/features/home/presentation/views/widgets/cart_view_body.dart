@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fruit_hub/features/home/presentation/views/widgets/payment_button.dart';
@@ -49,6 +51,10 @@ class _CartViewBodyState extends State<CartViewBody> {
           Gap(20),
           BlocBuilder<CartCubit, CartState>(
             builder: (context, state) {
+              if(state is CartInitial)
+                {
+                  log('cart initial state');
+                }
               return CartItemList(
                 cartItems: context.read<CartCubit>().cartEntity.cartItems,
               );

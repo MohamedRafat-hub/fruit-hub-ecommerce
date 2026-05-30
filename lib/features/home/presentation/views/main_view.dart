@@ -2,7 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fruit_hub/core/services/database_service.dart';
-import 'package:fruit_hub/core/services/firestore_service.dart';
 import 'package:fruit_hub/core/services/git_it_service.dart';
 import 'package:fruit_hub/features/auth/presentation/cubits/getProfileDataCubit/get_profile_data_cubit.dart';
 import 'package:fruit_hub/features/auth/presentation/views/profile_view.dart';
@@ -72,10 +71,6 @@ class _MainViewBodyState extends State<MainViewBody> {
     final bottomNavProvider = Provider.of<BottomNavProvider>(context);
     return MultiBlocProvider(
       providers: [
-        BlocProvider<CartCubit>(
-          create: (context) => CartCubit(),
-        ),
-
         BlocProvider(
           create: (context) => GetProfileDataCubit(
             fireStoreService: getIt.get<DatabaseService>(),

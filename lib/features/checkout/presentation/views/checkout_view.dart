@@ -10,6 +10,7 @@ import 'package:fruit_hub/features/checkout/presentation/views/widgets/add_order
 import 'package:fruit_hub/features/checkout/presentation/views/widgets/checkout_app_bar.dart';
 import 'package:fruit_hub/features/checkout/presentation/views/widgets/checkout_view_body.dart';
 import 'package:fruit_hub/features/home/domain/entities/cart_entity.dart';
+import 'package:fruit_hub/features/home/presentation/managers/cartCubit/cart_cubit.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
@@ -32,7 +33,7 @@ class _CheckoutViewState extends State<CheckoutView> {
   @override
   void initState() {
     orderEntity = OrderEntity(
-      date:  DateFormat('d MMMM ,yyyy', 'ar').format(DateTime.now()),
+        date: DateFormat('d MMMM ,yyyy', 'ar').format(DateTime.now()),
         uid: FirebaseAuth.instance.currentUser!.uid,
         cartEntity: widget.cartEntity,
         shippingAddress: ShippingAddressEntity());
@@ -41,14 +42,20 @@ class _CheckoutViewState extends State<CheckoutView> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => AddOrderCubit(getIt.get<AddOrderRepo>()),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<AddOrderCubit>(
+          create: (context) => AddOrderCubit(getIt.get<AddOrderRepo>()),
+        ),
+      ],
       child: Scaffold(
-        appBar: checkoutAppBar(title: 'الشحن' , onPressed: ()=> Navigator.pop(context)),
+        appBar: checkoutAppBar(
+            title: 'الشحن', onPressed: () => Navigator.pop(context)),
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: Provider.value(value: orderEntity, child: AddOrderCubitBlocBuilder(
-              child: CheckoutViewBody())),
+          child: Provider.value(
+              value: orderEntity,
+              child: AddOrderCubitBlocBuilder(child: CheckoutViewBody())),
         ),
       ),
     );
