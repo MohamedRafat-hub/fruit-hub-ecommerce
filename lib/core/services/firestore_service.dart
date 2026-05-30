@@ -61,4 +61,25 @@ class FireStoreService implements DatabaseService {
     await fireStore.collection(path).doc(documentId).delete();
   }
 
+  @override
+  Future<int> getNextOrderNumber({required String path, required String doc})async {
+    final counterRef = FirebaseFirestore.instance
+        .collection(path)
+        .doc(doc);
+
+    int newOrderNumber = 0;
+
+    await FirebaseFirestore.instance.runTransaction((transaction) async {
+      final snapshot = await transaction.get(counterRef);
+
+      newOrderNumber = (snapshot.data()?['lastOrderNumber'] ?? 1000) + 1;
+
+      transaction.set(counterRef, {'lastOrderNumber': newOrderNumber});
+    });
+
+    return newOrderNumber;
+  }
+
+
+
 }

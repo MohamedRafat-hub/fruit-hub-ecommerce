@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fruit_hub/core/services/git_it_service.dart';
+import 'package:fruit_hub/core/utils/app_colors.dart';
 import 'package:fruit_hub/features/auth/domain/repos/auth_repo.dart';
 import 'package:fruit_hub/features/auth/domain/repos/image_repo.dart';
 import 'package:fruit_hub/features/auth/presentation/cubits/signoutCubit/sign_out_cubit.dart';
@@ -52,16 +53,18 @@ class _ProfileViewState extends State<ProfileView> {
             const UserData(),
             const Gap(30),
 
-            const Text('عام',
-                style:
-                    TextStyle(color: Colors.grey, fontWeight: FontWeight.bold)),
-            const SizedBox(height: 10),
+            // const Text('عام',
+            //     style:
+            //         TextStyle(color: Colors.grey, fontWeight: FontWeight.bold)),
+            // const SizedBox(height: 10),
             _buildListTile(Icons.person_outline, 'الملف الشخصي',
                 hasNavigation: true , onTap: (){
               Navigator.pushNamed(context, MyAccountView.routeName);
                 }),
             _buildListTile(Icons.inventory_2_outlined, 'طلباتي',
-                hasNavigation: true),
+                hasNavigation: true , onTap: (){
+              Navigator.pushNamed(context, 'last-orders');
+            }),
             _buildListTile(Icons.account_balance_wallet_outlined, 'المدفوعات',
                 hasNavigation: true , onTap: (){
               Navigator.pushNamed(context, PaymentsView.routeName);
@@ -70,11 +73,6 @@ class _ProfileViewState extends State<ProfileView> {
                 hasNavigation: true, onTap: () {
               log('Navigating to Favourite Products View');
               Navigator.pushNamed(context, FavouriteProductsView.routeName);
-            }),
-            _buildSwitchTile(title:  'الإشعارات', value: notificationsEnabled, onChanged: (value) {
-              setState(() {
-                notificationsEnabled = value;
-              });
             }),
             _buildListTile(Icons.language, 'اللغة',
                 trailingText: 'العربية', hasNavigation: true),
@@ -110,7 +108,7 @@ class _ProfileViewState extends State<ProfileView> {
       {bool hasNavigation = false, String? trailingText, Function()? onTap}) {
     return ListTile(
       contentPadding: EdgeInsets.zero,
-      leading: Icon(icon, color: Colors.grey[700]),
+      leading: Icon(icon, color: AppColors.primaryColor),
       title: Text(title, style: const TextStyle(color: Colors.grey)),
       trailing: Row(
         mainAxisSize: MainAxisSize.min,

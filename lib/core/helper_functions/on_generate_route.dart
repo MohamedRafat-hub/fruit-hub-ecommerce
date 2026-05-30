@@ -19,6 +19,7 @@ import 'package:fruit_hub/features/home/presentation/views/home_view.dart';
 import 'package:fruit_hub/features/onboarding/presentation/views/onboarding_view.dart';
 import 'package:fruit_hub/features/splash/presentation/views/splah_view.dart';
 
+import '../../features/checkout/presentation/views/last_orders_view.dart';
 import '../services/git_it_service.dart';
 
 Route<dynamic> onGenerateRoute(RouteSettings settings) {
@@ -56,6 +57,8 @@ Route<dynamic> onGenerateRoute(RouteSettings settings) {
           ));
     case PaymentsView.routeName:
       return MaterialPageRoute(builder: (context) => PaymentsView());
+      case LastOrdersView.routeName:
+      return MaterialPageRoute(builder: (context) => LastOrdersView());
     default:
       return MaterialPageRoute(builder: (context) => Scaffold());
   }

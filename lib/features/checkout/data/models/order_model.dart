@@ -8,16 +8,18 @@ class OrderModel {
   final ShippingAddressModel shippingAddressModel;
   final List<OrderProductModel> orderProducts;
   final String paymentMethod;
+  final int orderNumber;
 
   OrderModel(
       {required this.totalPrice,
         required this.uid,
         required this.shippingAddressModel,
         required this.orderProducts,
-        required this.paymentMethod});
+        required this.paymentMethod, required this.orderNumber});
 
-  factory OrderModel.fromEntity(OrderEntity entity) {
+  factory OrderModel.fromEntity(OrderEntity entity , {required int orderNumber}) {
     return OrderModel(
+      orderNumber: orderNumber,
         totalPrice: entity.cartEntity.calculateTotalPrice(),
         uid: entity.uid,
         shippingAddressModel:
@@ -30,6 +32,7 @@ class OrderModel {
 
   Map<String, dynamic> toJson() {
     return {
+      'orderNumber': orderNumber,
       'status':"pending",
       'totalPrice': totalPrice,
       'uid': uid,

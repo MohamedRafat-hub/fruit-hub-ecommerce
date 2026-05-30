@@ -17,9 +17,10 @@ class AddOrderRepoImpl implements AddOrderRepo {
   @override
   Future<Either<Failure, void>> addOrder({required OrderEntity orderEntity})async {
     try {
+      final orderNumber = await databaseService.getNextOrderNumber(path: BackendEndpoint.counters, doc: BackendEndpoint.orders);
       databaseService.addData(
           path: BackendEndpoint.orders,
-          data: OrderModel.fromEntity(orderEntity).toJson());
+          data: OrderModel.fromEntity(orderEntity , orderNumber: orderNumber).toJson());
       return right(null);
     }catch (e) {
       return left(ServerFailure(e.toString()));

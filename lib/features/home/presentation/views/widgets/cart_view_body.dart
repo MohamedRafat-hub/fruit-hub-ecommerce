@@ -34,7 +34,7 @@ class _CartViewBodyState extends State<CartViewBody> {
                   spacing: 8,
                   children: [
                     Text(
-                      'لديك ${context.read<CartCubit>().cartEntity.cartItems.length} منتجات في سله التسوق',
+                      'لديك ${context.watch<CartCubit>().cartEntity.cartItems.length} منتجات في سله التسوق',
                       style: TextStyle(
                         color: const Color(0xFF1B5E37) /* Green1-500 */,
                         fontSize: 13,

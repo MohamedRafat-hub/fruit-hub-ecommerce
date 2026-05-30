@@ -17,4 +17,6 @@ abstract class DatabaseService {
       required String documentId,
       required Map<String, dynamic> data});
   Future<void> deleteData({required String path, required String documentId});
+
+  Future<int>getNextOrderNumber({required String path , required String doc});
 }

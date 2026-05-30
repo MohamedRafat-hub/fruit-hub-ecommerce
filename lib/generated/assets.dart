@@ -45,6 +45,7 @@ class Assets {
   static const String iconsGoogleIcon = 'assets/icons/google_icon.svg';
   static const String iconsHomeActiveIcon = 'assets/icons/home_active_icon.svg';
   static const String iconsHomeIcon = 'assets/icons/home_icon.svg';
+  static const String iconsOrdersIcon = 'assets/icons/orders_icon.svg';
   static const String iconsProductsActiveIcon = 'assets/icons/products_active_icon.svg';
   static const String iconsProductsIcon = 'assets/icons/products_icon.svg';
   static const String iconsRemoveIcon = 'assets/icons/remove_icon.svg';
@@ -117,6 +118,7 @@ class Assets {
   static const String viewsCheckoutView = 'lib/features/checkout/presentation/views/checkout_view.dart';
   static const String viewsFavouriteProductsView = 'lib/features/home/presentation/views/favourite_products_view.dart';
   static const String viewsHomeView = 'lib/features/home/presentation/views/home_view.dart';
+  static const String viewsLastOrdersView = 'lib/features/checkout/presentation/views/last_orders_view.dart';
   static const String viewsLoginView = 'lib/features/auth/presentation/views/login_view.dart';
   static const String viewsMainView = 'lib/features/home/presentation/views/main_view.dart';
   static const String viewsMyAccountView = 'lib/features/auth/presentation/views/my_account_view.dart';
