@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:fruit_hub/core/cubits/theme_cubit.dart';
 import 'package:fruit_hub/core/helper_functions/on_generate_route.dart';
 import 'package:fruit_hub/core/services/custom_bloc_observer.dart';
 import 'package:fruit_hub/core/services/git_it_service.dart';
@@ -31,23 +32,42 @@ class FruitsHub extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => CartCubit(),
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          scaffoldBackgroundColor: Colors.white,
-          colorScheme: ColorScheme.fromSeed(seedColor: AppColors.primaryColor),
+      create: (context) => ThemeCubit(),
+      child: BlocProvider(
+        create: (context) => CartCubit(),
+        child: BlocBuilder<ThemeCubit, ThemeMode>(
+          builder: (context, themeMode) {
+            return MaterialApp(
+              debugShowCheckedModeBanner: false,
+              themeMode: themeMode,
+              theme: ThemeData(
+                scaffoldBackgroundColor: Colors.white,
+                colorScheme:
+                ColorScheme.fromSeed(seedColor: AppColors.primaryColor),
+              ),
+              darkTheme: ThemeData(
+                brightness: Brightness.dark,
+                scaffoldBackgroundColor: const Color(0xFF1E1E2C), // ✅ background غامق
+                cardColor: const Color(0xFF2A2A3C), // ✅ cards أغمق
+                colorScheme: ColorScheme.dark(
+                  primary: AppColors.primaryColor,
+                  surface: const Color(0xFF2A2A3C),
+                  background: const Color(0xFF1E1E2C),
+                ),
+              ),
+              locale: Locale('ar'),
+              localizationsDelegates: [
+                S.delegate,
+                GlobalMaterialLocalizations.delegate,
+                GlobalWidgetsLocalizations.delegate,
+                GlobalCupertinoLocalizations.delegate,
+              ],
+              supportedLocales: S.delegate.supportedLocales,
+              onGenerateRoute: onGenerateRoute,
+              initialRoute: SplashView.routeName,
+            );
+          },
         ),
-        locale: Locale('ar'),
-        localizationsDelegates: [
-          S.delegate,
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-        ],
-        supportedLocales: S.delegate.supportedLocales,
-        onGenerateRoute: onGenerateRoute,
-        initialRoute: SplashView.routeName,
       ),
     );
   }

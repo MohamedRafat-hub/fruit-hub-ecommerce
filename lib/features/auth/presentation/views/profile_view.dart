@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fruit_hub/core/cubits/theme_cubit.dart';
 import 'package:fruit_hub/core/services/git_it_service.dart';
 import 'package:fruit_hub/core/utils/app_colors.dart';
 import 'package:fruit_hub/features/auth/domain/repos/auth_repo.dart';
@@ -44,30 +45,22 @@ class _ProfileViewState extends State<ProfileView> {
                 authRepo: getIt.get<AuthRepo>())),
       ],
       child: Scaffold(
-        backgroundColor: Colors.white,
-        appBar: buildAppBar(title: 'حسابي' , hasLeading: false, context: context),
+        // backgroundColor: Colors.white,
+        appBar:
+            buildAppBar(title: 'حسابي', hasLeading: false, context: context),
         body: ListView(
           padding: const EdgeInsets.symmetric(horizontal: 20),
           children: [
             const Gap(20),
             const UserData(),
             const Gap(30),
-
-            // const Text('عام',
-            //     style:
-            //         TextStyle(color: Colors.grey, fontWeight: FontWeight.bold)),
-            // const SizedBox(height: 10),
             _buildListTile(Icons.person_outline, 'الملف الشخصي',
-                hasNavigation: true , onTap: (){
+                hasNavigation: true, onTap: () {
               Navigator.pushNamed(context, MyAccountView.routeName);
-                }),
-            _buildListTile(Icons.inventory_2_outlined, 'طلباتي',
-                hasNavigation: true , onTap: (){
-              Navigator.pushNamed(context, 'last-orders');
             }),
-            _buildListTile(Icons.account_balance_wallet_outlined, 'المدفوعات',
-                hasNavigation: true , onTap: (){
-              Navigator.pushNamed(context, PaymentsView.routeName);
+            _buildListTile(Icons.inventory_2_outlined, 'طلباتي',
+                hasNavigation: true, onTap: () {
+              Navigator.pushNamed(context, 'last-orders');
             }),
             _buildListTile(Icons.favorite_border, 'المفضلة',
                 hasNavigation: true, onTap: () {
@@ -77,11 +70,12 @@ class _ProfileViewState extends State<ProfileView> {
             _buildListTile(Icons.language, 'اللغة',
                 trailingText: 'العربية', hasNavigation: true),
 
-            _buildSwitchTile(title: 'الوضع', value: darkModeEnabled, onChanged: (value) {
-              setState(() {
-                darkModeEnabled = value;
-              });
-            }),
+            _buildSwitchTile(
+                title: 'الوضع',
+                value: darkModeEnabled,
+                onChanged: (value) {
+                  context.read<ThemeCubit>().toggleTheme();
+                }),
 
             const SizedBox(height: 20),
 
@@ -90,7 +84,8 @@ class _ProfileViewState extends State<ProfileView> {
                 style:
                     TextStyle(color: Colors.grey, fontWeight: FontWeight.bold)),
             const SizedBox(height: 10),
-            _buildListTile(Icons.info_outline, 'من نحن', hasNavigation: true , onTap: (){
+            _buildListTile(Icons.info_outline, 'من نحن', hasNavigation: true,
+                onTap: () {
               Navigator.pushNamed(context, AboutUsView.routeName);
             }),
 
@@ -124,36 +119,23 @@ class _ProfileViewState extends State<ProfileView> {
     );
   }
 
-   Widget _buildSwitchTile({
-     required String title,
-     required bool value,
-     required Function(bool) onChanged,
-   }) {
-     return ListTile(
-       contentPadding: EdgeInsets.zero,
-
-       leading: value
-           ? const Icon(
-         Icons.notifications_none_outlined,
-         color: Colors.grey,
-       )
-           : const Icon(
-         Icons.notifications_off_outlined,
-         color: Colors.grey,
-       ),
-
-       title: Text(
-         title,
-         style: const TextStyle(color: Colors.grey),
-       ),
-
-       trailing: Switch(
-         value: value,
-
-         onChanged: onChanged,
-
-         activeColor: Colors.green,
-       ),
-     );
-   }
+  Widget _buildSwitchTile({
+    required String title,
+    required bool value,
+    required Function(bool) onChanged,
+  }) {
+    return ListTile(
+      contentPadding: EdgeInsets.zero,
+      leading: Icon(Icons.dark_mode_outlined, color: AppColors.primaryColor),
+      title: Text(
+        title,
+        style: const TextStyle(color: Colors.grey),
+      ),
+      trailing: Switch(
+        value: value,
+        onChanged: onChanged,
+        activeColor: Colors.green,
+      ),
+    );
+  }
 }
