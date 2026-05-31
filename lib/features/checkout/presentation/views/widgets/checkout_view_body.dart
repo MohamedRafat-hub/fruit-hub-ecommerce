@@ -101,7 +101,7 @@ class _CheckoutViewBodyState extends State<CheckoutViewBody> {
       case 1:
         return 'التالي';
       case 2:
-        return 'الدفع باستخدام PayPal';
+        return 'التأكيد والمراجعة';
       default:
         return 'التالي';
     }

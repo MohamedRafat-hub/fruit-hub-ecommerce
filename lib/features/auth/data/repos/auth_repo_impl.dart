@@ -65,6 +65,10 @@ class AuthRepoImpl extends AuthRepo {
     User? user;
     try {
       user = await firebaseAuthService.signInWithGoogle();
+      if(user == null)
+        {
+          return left(ServerFailure('Google sign-in was cancelled by the user.'));
+        }
       bool exist = await checkIfDataExist(
           path: BackendEndpoint.getUserData, documentId: user.uid);
       late UserEntity userEntity;
@@ -91,7 +95,10 @@ class AuthRepoImpl extends AuthRepo {
     User? user;
     try {
       user = await firebaseAuthService.signInWithFacebook();
-
+      if(user == null)
+      {
+        return left(ServerFailure('Facebook sign-in was cancelled by the user.'));
+      }
       bool exist = await checkIfDataExist(
           path: BackendEndpoint.getUserData, documentId: user.uid);
       late UserEntity userEntity;

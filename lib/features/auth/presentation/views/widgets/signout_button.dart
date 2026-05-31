@@ -23,7 +23,9 @@ class SignOutButton extends StatelessWidget {
       },
       builder: (context, state) {
         return state is SignOutLoading
-            ? CircularProgressIndicator()
+            ? CircularProgressIndicator(
+          color: AppColors.primaryColor,
+        )
             : CustomMaterialButton(
           buttonName: 'تسجيل الخروج',
           onPressed: () => _showSignOutDialog(context),

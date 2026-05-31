@@ -60,10 +60,14 @@ class FirebaseAuthService {
     }
   }
 
-  Future<User> signInWithGoogle() async {
+  Future<User?> signInWithGoogle() async {
     final GoogleSignInAccount? googleUser =
         await GoogleSignIn().signIn(); // Trigger the authentication flow
 
+    if(googleUser == null) {
+      // The user canceled the sign-in
+      return null;
+    }
     final GoogleSignInAuthentication? googleAuth =
         await googleUser?.authentication;
 
@@ -76,11 +80,17 @@ class FirebaseAuthService {
         .user!;
   }
 
-  Future<User> signInWithFacebook() async {
+  Future<User?> signInWithFacebook() async {
     // Trigger the sign-in flow
     final LoginResult loginResult = await FacebookAuth.instance.login();
 
     // Create a credential from the access token
+
+    if(loginResult.status == LoginStatus.cancelled)
+      {
+        // The user canceled the sign-in
+        return null;
+      }
 
     final OAuthCredential facebookAuthCredential =
         FacebookAuthProvider.credential(loginResult.accessToken!.tokenString);
