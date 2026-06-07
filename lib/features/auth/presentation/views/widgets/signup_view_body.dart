@@ -38,6 +38,7 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
               Gap(20),
               /// fields
               CustomTextFormField(
+                stringOnly: true,
                   onSaved: (value) {
                     name = value!.trim();
                   },

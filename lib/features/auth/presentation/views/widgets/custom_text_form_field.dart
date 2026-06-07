@@ -14,6 +14,8 @@ class CustomTextFormField extends StatelessWidget {
     this.obscureText = false,
     this.controller,
     this.readOnly = false,
+    this.isPhoneNumber = false,
+    this.stringOnly = false,
   });
 
   final String hintText;
@@ -23,6 +25,9 @@ class CustomTextFormField extends StatelessWidget {
   final bool obscureText;
   final TextEditingController? controller;
   final bool readOnly;
+  final bool isPhoneNumber;
+  final bool stringOnly;
+
   @override
   Widget build(BuildContext context) {
     return TextFormField(
@@ -33,6 +38,20 @@ class CustomTextFormField extends StatelessWidget {
       validator: (value) {
         if (value == null || value.isEmpty) {
           return 'هذا الحقل مطلوب';
+        }
+        if (isPhoneNumber == true) {
+          if (!RegExp(r'^[0-9]+$').hasMatch(value)) {
+            return 'رقم الهاتف يجب أن يحتوي على أرقام فقط';
+          }
+
+          if (value.length != 11) {
+            return 'رقم الهاتف يجب أن يكون 11 رقم';
+          }
+        }
+        if (stringOnly) {
+          if (!RegExp(r'^[a-zA-Z\u0600-\u06FF\s]+$').hasMatch(value)) {
+            return 'يجب إدخال حروف فقط';
+          }
         }
         return null;
       },
@@ -45,7 +64,9 @@ class CustomTextFormField extends StatelessWidget {
               fontSize: 13,
               fontWeight: FontWeight.w700),
           filled: true,
-          fillColor: context.read<ThemeCubit>().state == ThemeMode.dark ? Color(0xFF1C1C1C) : Colors.white,
+          fillColor: context.read<ThemeCubit>().state == ThemeMode.dark
+              ? Color(0xFF1C1C1C)
+              : Colors.white,
           border: buildBorder(),
           enabledBorder: buildBorder()),
     );
